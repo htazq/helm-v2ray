@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: v2ray
+  labels:
+    app: v2ray
+spec:
+  selector:
+    matchLabels:
+      app: v2ray
+  template:
+    metadata:
+      labels:
+        app: v2ray
+    spec:
+      hostNetwork: true  # 使用宿主机网络
+      containers:
+      - name: v2ray
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        ports:
+        - containerPort: {{ .Values.v2ray.port }}
+        volumeMounts:
+        - name: v2ray-config-volume
+          mountPath: /etc/v2ray
+        resources:
+          {{- toYaml .Values.resources | nindent 14 }}
+      volumes:
+      - name: v2ray-config-volume
+        configMap:
+          name: v2ray-config
+      nodeSelector:
+        {{- toYaml .Values.nodeSelector | nindent 12 }}
+      tolerations:
+        {{- toYaml .Values.tolerations | nindent 12 }}
+      affinity:
+        {{- toYaml .Values.affinity | nindent 12 }}
