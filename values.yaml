@@ -1,0 +1,31 @@
+image:
+  repository: teddysun/v2ray
+  tag: latest
+  pullPolicy: IfNotPresent
+
+v2ray:
+  uuid: "939b17c4-229d-427b-8a3e-340036847812"  # 替换成你自己的 UUID
+  port: 30800 # 统一端口
+  # 其他 V2Ray 配置，可以根据需要添加
+  alterId: 64
+  network: tcp
+  security: auto
+
+service:
+  type: NodePort
+  nodePort: 30800  # 统一对外暴露的 NodePort
+  # serviceType: ClusterIP  如果你想用 ClusterIP, 需要做端口转发或Ingress
+
+resources:
+  limits:
+    cpu: 200m
+    memory: 512Mi
+  requests:
+    cpu: 100m
+    memory: 256Mi
+    
+nodeSelector: {}  # 如果要选择特定节点，可以在这里添加
+
+tolerations: [] # 容忍,可选项
+
+affinity: {} # 亲和性,可选项
