@@ -1,4 +1,4 @@
-# kube-v2ray
+# helm-v2ray
 
 一个使用 Helm 在 Kubernetes 集群上部署 V2Ray 的工具，支持以 DaemonSet 方式在集群的每个节点上运行 V2Ray 实例。本项目基于 teddysun（秋水逸冰）大佬的 V2Ray 镜像构建。
 
@@ -23,8 +23,8 @@
 1. **克隆仓库**
 
 ```bash
-git clone https://github.com/yourusername/kube-v2ray.git
-cd kube-v2ray
+git clone https://github.com/htazq/helm-v2ray.git
+cd helm-v2ray
 ```
 
 2. **安装 Helm Chart**
@@ -78,7 +78,7 @@ helm install v2ray ./v2ray-daemonset -n v2ray --set v2ray.uuid=your-custom-uuid 
 
 ## 工作原理
 
-kube-v2ray 使用 Kubernetes DaemonSet 在集群的每个节点上部署 V2Ray 实例。这意味着：
+helm-v2ray 使用 Kubernetes DaemonSet 在集群的每个节点上部署 V2Ray 实例。这意味着：
 
 - 每个 Kubernetes 节点都会运行一个 V2Ray Pod
 - 所有 Pod 共享相同的配置（UUID、端口等）
@@ -151,7 +151,7 @@ v2ray:
 
 ## 卸载
 
-要卸载 kube-v2ray，请运行：
+要卸载 helm-v2ray，请运行：
 
 ```bash
 helm uninstall v2ray -n v2ray
